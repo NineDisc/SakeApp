@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.sakeapp.ui.component.SakeBottomAppBar
 import com.example.sakeapp.ui.component.SakeTopAppBar
-import com.example.sakeapp.ui.feature.ranking.RankingScreen
+import com.example.sakeapp.ui.feature.ranking.RankingContents
 
 @Composable
 fun SakeApp() {
@@ -18,7 +18,8 @@ fun SakeApp() {
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
-            RankingScreen()
+//            RankingScreen()
+            RankingContents()
         }
     }
 }

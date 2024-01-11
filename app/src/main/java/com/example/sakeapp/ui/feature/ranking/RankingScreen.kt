@@ -20,8 +20,16 @@ import com.example.sakeapp.ui.theme.SakeAppTheme
 
 private val dummyList = listOf("獺祭", "田酒", "東洋美人", "八海山")
 
+
 @Composable
-fun RankingScreen() {
+fun RankingContents() {
+    val viewModel = RankingViewModel()
+    RankingScreen(viewModel = viewModel)
+}
+
+@Composable
+fun RankingScreen(viewModel: RankingViewModel) {
+
     Column {
         Text(
             text = "ランキング",
@@ -35,6 +43,9 @@ fun RankingScreen() {
             items(items = dummyList) { item ->
                 RankingItem(itemName = item)
             }
+//            items(items = viewModel.sakeNames!!.overall) { item ->
+//                RankingItem(itemName = item.rank.toString())
+//            }
         }
     }
 }
@@ -56,9 +67,9 @@ fun RankingItem(itemName: String) {
 
 @Preview
 @Composable
-fun RankingScreenPreview(){
+fun RankingScreenPreview() {
     SakeAppTheme {
-        RankingScreen()
+//        RankingScreen()
     }
 }
 
