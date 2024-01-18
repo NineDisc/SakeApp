@@ -18,7 +18,6 @@ fun SakeApp() {
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
-//            RankingScreen()
             RankingContents()
         }
     }

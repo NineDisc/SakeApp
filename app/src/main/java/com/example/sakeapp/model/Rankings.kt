@@ -6,12 +6,12 @@ import kotlinx.serialization.Serializable
 data class Rankings(
     val copyright: String,
     val yearMonth: String,
-    val overall: List<RankingsInfo>,
-    val areas: List<RankingsAreaInfo>
+    val overall: List<RankingItem>,
+    val areas: List<AreaRanking>
 )
 
 @Serializable
-data class RankingsInfo(val rank: Int, val score: Float, val brandId: Int)
+data class RankingItem(val rank: Int, val score: Float, val brandId: Int)
 
 @Serializable
-data class RankingsAreaInfo(val areaId: Int, val ranking: List<RankingsInfo>)
+data class AreaRanking(val areaId: Int, val ranking: List<RankingItem>)
