@@ -1,14 +1,14 @@
 package com.example.sakeapp.ui.component
 
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-
-
+import com.example.sakeapp.ui.theme.BlueGrey
 
 @Composable
 fun SakeBottomAppBar(){
-    BottomAppBar(containerColor = MaterialTheme.colorScheme.secondary) {
+        BottomAppBar(
+            containerColor = BlueGrey,
+        ) {
 
-    }
+        }
 }
