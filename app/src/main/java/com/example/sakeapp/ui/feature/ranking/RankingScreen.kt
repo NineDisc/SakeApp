@@ -30,8 +30,9 @@ fun RankingScreen() {
     viewModel.fetch()
     Column {
         Text(
-            text = "ランキング",
+            text = "日本酒ランキング${viewModel.year.value}年${viewModel.month.value}月版",
             modifier = Modifier.fillMaxWidth(),
+            fontSize = 32.sp,
             textAlign = TextAlign.Center
         )
         LazyColumn(
@@ -48,12 +49,9 @@ fun RankingScreen() {
 
 @Composable
 fun RankingItem(item: SakeRanking) {
-
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
-//            .height(400.dp)
             .background(Color.White)
             .padding(16.dp)
     ) {
@@ -64,7 +62,6 @@ fun RankingItem(item: SakeRanking) {
             modifier = Modifier.fillMaxWidth()
         )
 
-        Text(text = "フリガナ")
         Text(text = item.name, fontSize = 36.sp)
         Text(text = "${item.breweries}  ${item.area}")
     }
@@ -75,7 +72,7 @@ fun RankingItem(item: SakeRanking) {
 @Composable
 fun RankingScreenPreview() {
     SakeAppTheme {
-//        RankingScreen()
+        RankingScreen()
     }
 }
 

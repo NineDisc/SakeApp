@@ -1,6 +1,7 @@
 package com.example.sakeapp.ui.feature.ranking
 
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sakeapp.model.Areas
@@ -26,45 +27,35 @@ class RankingViewModel : ViewModel() {
         }
     }
     private val apiBaseUrl = "https://muro.sakenowa.com/sakenowa-data/api/"
-
-
-    //JSONをMapに格納して、ランキングの値から全て情報取り出したい。
-    private var rankingsApiResult: Rankings? = null
-    private var brandsApiResult: Brands? = null
-    private var breweriesApiResult: Breweries? = null
-    private var areasApiResult: Areas? = null
+    val year = mutableStateOf("")
+    val month = mutableStateOf("")
     val rankingList = mutableStateListOf<SakeRanking>()
     fun fetch() {
         viewModelScope.launch {
             try {
-                val rankingsResponse = client.get("${apiBaseUrl}rankings")
-                val brandsResponse = client.get("${apiBaseUrl}brands")
-                val breweriesResponse = client.get("${apiBaseUrl}breweries")
-                val areasResponse = client.get("${apiBaseUrl}areas")
-                rankingsApiResult = rankingsResponse.body()
-                brandsApiResult = brandsResponse.body()
-                breweriesApiResult = breweriesResponse.body()
-                areasApiResult = areasResponse.body()
+                val rankingsApiResult = client.get("${apiBaseUrl}rankings").body<Rankings>()
+                val brandsApiResult = client.get("${apiBaseUrl}brands").body<Brands>()
+                val breweriesApiResult = client.get("${apiBaseUrl}breweries").body<Breweries>()
+                val areasApiResult = client.get("${apiBaseUrl}areas").body<Areas>()
+
                 for (index in 0..10) {
-                    val rankingItem = rankingsApiResult?.overall?.get(index)
+                    val rankingItem = rankingsApiResult.overall[index]
                     val brand =
-                        brandsApiResult?.brands!!.last { brands -> rankingItem?.brandId == brands.id }
+                        brandsApiResult.brands.last { brands -> rankingItem.brandId == brands.id }
                     val brewery =
-                        breweriesApiResult?.breweries!!.last { brewery -> brewery.id == brand.id }
-                    val area = areasApiResult?.areas!!.last { area -> area.id == brewery.areaId }
+                        breweriesApiResult.breweries.last { brewery -> brewery.id == brand.id }
+                    val area = areasApiResult.areas.last { area -> area.id == brewery.areaId }
                     val brandName = brand.name
                     val breweryName = brewery.name
                     val areaName = area.name
-                    if (rankingItem != null) {
-                        rankingList.add(
-                            SakeRanking(
-                                rank = rankingItem.rank,
-                                name = brandName,
-                                breweries = breweryName,
-                                area = areaName
-                            )
+                    rankingList.add(
+                        SakeRanking(
+                            rank = rankingItem.rank,
+                            name = brandName,
+                            breweries = breweryName,
+                            area = areaName
                         )
-                    }
+                    )
                 }
             } catch (_: Exception) {
 
