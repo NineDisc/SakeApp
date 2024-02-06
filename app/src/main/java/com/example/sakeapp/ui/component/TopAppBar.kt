@@ -14,6 +14,7 @@ import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.sakeapp.ui.theme.BlueGrey
 import com.example.sakeapp.ui.theme.Grey20
 

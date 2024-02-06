@@ -13,15 +13,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.sakeapp.ui.theme.BlueGrey
 import com.example.sakeapp.ui.theme.Grey20
+import androidx.navigation.NavController
 
 @Composable
-fun SakeBottomAppBar(){
-    val context = LocalContext.current
+fun SakeBottomAppBar(navController: NavController){
         BottomAppBar(containerColor = Grey20) {
             Row(
                 modifier = Modifier.fillMaxSize(),
@@ -50,11 +49,13 @@ fun SakeBottomAppBar(){
                 }
 
                 IconButton(
-                    onClick = {/*TODO クリックイベント*/}
+                    onClick = {
+                        navController.navigate("starScreen")
+                    }
                 ) {
                     Icon(
                         Icons.Filled.Star,
-                        contentDescription = "ランキングアイコン",
+                        contentDescription = "スターアイコン",
                         tint = BlueGrey,
                         modifier = Modifier.size(100.dp)
                     )
@@ -63,8 +64,8 @@ fun SakeBottomAppBar(){
         }
 }
 
-@Preview
-@Composable
-fun SakeBottomAppBarPreview(){
-    SakeBottomAppBar()
-}
+//@Preview
+//@Composable
+//fun SakeBottomAppBarPreview(){
+//    SakeBottomAppBar(navController = )
+//}
