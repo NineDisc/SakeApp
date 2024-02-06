@@ -40,34 +40,35 @@ class RankingViewModel : ViewModel() {
                 val rankingsResponse = client.get("${apiBaseUrl}rankings")
                 val brandsResponse = client.get("${apiBaseUrl}brands")
                 val breweriesResponse = client.get("${apiBaseUrl}breweries")
-                val areasResponse = client.get("\"${apiBaseUrl}areas")
+                val areasResponse = client.get("${apiBaseUrl}areas")
                 rankingsApiResult = rankingsResponse.body()
                 brandsApiResult = brandsResponse.body()
                 breweriesApiResult = breweriesResponse.body()
                 areasApiResult = areasResponse.body()
-
-                for (index in 0..9) {
+                for (index in 0..10) {
                     val rankingItem = rankingsApiResult?.overall?.get(index)
-                    var name = ""
-                    var breweries = ""
-                    var area = ""
-                    for (brand in brandsApiResult?.brands!!) {
-                        if (rankingItem?.brandId == brand.id) {
-                            name = brand.name
-                        }
+                    val brand =
+                        brandsApiResult?.brands!!.last { brands -> rankingItem?.brandId == brands.id }
+                    val brewery =
+                        breweriesApiResult?.breweries!!.last { brewery -> brewery.id == brand.id }
+                    val area = areasApiResult?.areas!!.last { area -> area.id == brewery.areaId }
+                    val brandName = brand.name
+                    val breweryName = brewery.name
+                    val areaName = area.name
+                    if (rankingItem != null) {
+                        rankingList.add(
+                            SakeRanking(
+                                rank = rankingItem.rank,
+                                name = brandName,
+                                breweries = breweryName,
+                                area = areaName
+                            )
+                        )
                     }
-                    for(b in breweriesApiResult?.breweries!!){
-
-                    }
-
                 }
-//                rankingList.add(SakeRanking(rank = rankingItem.rank,name = brand.name, breweries = "",area = ""))
-
             } catch (_: Exception) {
 
             }
         }
     }
-
-
 }
