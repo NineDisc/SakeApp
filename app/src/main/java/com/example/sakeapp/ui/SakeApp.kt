@@ -18,7 +18,7 @@ fun SakeApp() {
     val navController = rememberNavController()
 
     Scaffold(
-        topBar = { SakeTopAppBar() },
+        topBar = { SakeTopAppBar(navController) },
         bottomBar = { SakeBottomAppBar(navController) },
         modifier = Modifier.fillMaxSize()
     ) { padding ->
