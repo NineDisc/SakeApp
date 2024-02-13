@@ -21,18 +21,18 @@ import com.example.sakeapp.ui.theme.SakeAppTheme
 
 @Composable
 fun RankingContents() {
-    RankingScreen()
+    val viewModel = RankingViewModel()
+    RankingScreen(viewModel)
 }
 
 @Composable
-fun RankingScreen() {
-    val viewModel = RankingViewModel()
+fun RankingScreen(viewModel: RankingViewModel) {
     viewModel.fetch()
     Column {
         Text(
-            text = "日本酒ランキング${viewModel.year.value}年${viewModel.month.value}月版",
+            text = "日本酒ランキング${viewModel.year}年${viewModel.month}月版",
             modifier = Modifier.fillMaxWidth(),
-            fontSize = 32.sp,
+            fontSize = 28.sp,
             textAlign = TextAlign.Center
         )
         LazyColumn(
@@ -72,7 +72,7 @@ fun RankingItem(item: SakeRanking) {
 @Composable
 fun RankingScreenPreview() {
     SakeAppTheme {
-        RankingScreen()
+//        RankingScreen()
     }
 }
 

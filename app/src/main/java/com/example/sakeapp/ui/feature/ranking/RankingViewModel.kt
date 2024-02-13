@@ -1,6 +1,5 @@
 package com.example.sakeapp.ui.feature.ranking
 
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,9 +26,12 @@ class RankingViewModel : ViewModel() {
         }
     }
     private val apiBaseUrl = "https://muro.sakenowa.com/sakenowa-data/api/"
-    val year = mutableStateOf("")
-    val month = mutableStateOf("")
-    val rankingList = mutableStateListOf<SakeRanking>()
+
+    //    val rankingList = mutableStateListOf<SakeRanking>()
+    val rankingList = mutableListOf<SakeRanking>()
+    private val isLoaded = mutableStateOf(false)
+    var year = ""
+    var month = ""
     fun fetch() {
         viewModelScope.launch {
             try {
@@ -37,6 +39,8 @@ class RankingViewModel : ViewModel() {
                 val brandsApiResult = client.get("${apiBaseUrl}brands").body<Brands>()
                 val breweriesApiResult = client.get("${apiBaseUrl}breweries").body<Breweries>()
                 val areasApiResult = client.get("${apiBaseUrl}areas").body<Areas>()
+                year = rankingsApiResult.yearMonth.substring(0, 4)
+                month = rankingsApiResult.yearMonth.substring(4, 6)
 
                 for (index in 0..10) {
                     val rankingItem = rankingsApiResult.overall[index]
@@ -60,6 +64,7 @@ class RankingViewModel : ViewModel() {
             } catch (_: Exception) {
 
             }
+            isLoaded.value = true
         }
     }
 }
