@@ -26,6 +26,7 @@ fun SakeApp() {
             NavHost(navController = navController, startDestination = "ranking"){
                 composable("ranking") { RankingContents() }
                 composable("starScreen") { StarIconScreen() }
+                composable("search") { SearchScreen() }
             }
         }
     }

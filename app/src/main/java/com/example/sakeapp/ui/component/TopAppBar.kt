@@ -65,8 +65,3 @@ fun SakeTopAppBar(navController: NavController) {
     )
 }
 
-//@Preview
-//@Composable
-//fun SakeTopAppBarPreview(){
-//    SakeTopAppBar()
-//}
