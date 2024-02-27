@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -28,6 +29,7 @@ fun RankingContents() {
 @Composable
 fun RankingScreen(viewModel: RankingViewModel) {
     viewModel.fetch()
+    val uiState = viewModel.uiState.collectAsState()
     Column {
         Text(
             text = "日本酒ランキング${viewModel.year}年${viewModel.month}月版",
@@ -39,10 +41,16 @@ fun RankingScreen(viewModel: RankingViewModel) {
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
+//            when(uiState){it ->
+//                RankingUiState.Contents -> {
+//
+//                }
+//            }
             items(items = viewModel.rankingList) { item ->
                 RankingItem(item = item)
                 Divider(thickness = 1.dp, color = Color.Black)
             }
+            android.util.Log.d("SEMBA", "aaaa")
         }
     }
 }

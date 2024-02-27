@@ -13,6 +13,8 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
@@ -32,10 +34,13 @@ class RankingViewModel : ViewModel() {
     private val isLoaded = mutableStateOf(false)
     var year = ""
     var month = ""
+
+    private val _uiState = MutableStateFlow<RankingUiState>(RankingUiState.Initial)
+    val uiState: StateFlow<RankingUiState> = _uiState
     fun fetch() {
         viewModelScope.launch {
             try {
-                val rankingsApiResult = client.get("${apiBaseUrl}rankings").body<Rankings>()
+                val rankingsApiResult: Rankings = client.get("${apiBaseUrl}rankings").body()
                 val brandsApiResult = client.get("${apiBaseUrl}brands").body<Brands>()
                 val breweriesApiResult = client.get("${apiBaseUrl}breweries").body<Breweries>()
                 val areasApiResult = client.get("${apiBaseUrl}areas").body<Areas>()
@@ -47,7 +52,7 @@ class RankingViewModel : ViewModel() {
                     val brand =
                         brandsApiResult.brands.last { brands -> rankingItem.brandId == brands.id }
                     val brewery =
-                        breweriesApiResult.breweries.last { brewery -> brewery.id == brand.id }
+                        breweriesApiResult.breweries.last { brewery -> brewery.id == brand.breweryId }
                     val area = areasApiResult.areas.last { area -> area.id == brewery.areaId }
                     val brandName = brand.name
                     val breweryName = brewery.name
@@ -64,7 +69,7 @@ class RankingViewModel : ViewModel() {
             } catch (_: Exception) {
 
             }
-            isLoaded.value = true
+            _uiState.value = RankingUiState.Contents(rankingList)
         }
     }
 }
