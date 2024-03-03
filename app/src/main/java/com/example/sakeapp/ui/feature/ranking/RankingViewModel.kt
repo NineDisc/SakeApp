@@ -69,7 +69,7 @@ class RankingViewModel : ViewModel() {
             } catch (_: Exception) {
 
             }
-            _uiState.value = RankingUiState.Contents(rankingList)
+            _uiState.value = RankingUiState.Contents(rankingList,year,month)
         }
     }
 }
