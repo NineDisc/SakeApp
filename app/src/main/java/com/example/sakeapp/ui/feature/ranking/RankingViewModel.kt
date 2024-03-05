@@ -1,6 +1,5 @@
 package com.example.sakeapp.ui.feature.ranking
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sakeapp.model.Areas
@@ -29,11 +28,9 @@ class RankingViewModel : ViewModel() {
     }
     private val apiBaseUrl = "https://muro.sakenowa.com/sakenowa-data/api/"
 
-    //    val rankingList = mutableStateListOf<SakeRanking>()
-    val rankingList = mutableListOf<SakeRanking>()
-    private val isLoaded = mutableStateOf(false)
-    var year = ""
-    var month = ""
+    private val rankingList = mutableListOf<SakeRanking>()
+    private var year = ""
+    private var month = ""
 
     private val _uiState = MutableStateFlow<RankingUiState>(RankingUiState.Initial)
     val uiState: StateFlow<RankingUiState> = _uiState
@@ -69,7 +66,7 @@ class RankingViewModel : ViewModel() {
             } catch (_: Exception) {
 
             }
-            _uiState.value = RankingUiState.Contents(rankingList,year,month)
+            _uiState.value = RankingUiState.Contents(rankingList, year, month)
         }
     }
 }
