@@ -86,7 +86,7 @@ fun RankingItem(item: SakeRanking) {
 @Composable
 fun RankingScreenPreview() {
     SakeAppTheme {
-//        RankingScreen()
+        RankingScreen()
     }
 }
 
