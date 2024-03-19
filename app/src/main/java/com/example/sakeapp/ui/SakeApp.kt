@@ -26,7 +26,6 @@ fun SakeApp() {
         Column(modifier = Modifier.padding(padding)) {
             NavHost(navController = navController, startDestination = "ranking"){
                 composable("ranking") { RankingContents() }
-                composable("starScreen") { StarIconScreen() }
                 composable("search") { SearchScreen() }
             }
         }
