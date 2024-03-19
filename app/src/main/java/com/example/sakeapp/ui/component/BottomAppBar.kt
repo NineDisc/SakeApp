@@ -8,7 +8,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.Timelapse
 import androidx.compose.material.icons.filled.Timeline
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
@@ -38,18 +37,6 @@ fun SakeBottomAppBar(navController: NavController) {
                 icon = Icons.Filled.Search,
                 contentDescription = "検索アイコン",
                 onClick = { navController.navigate("search") }
-            )
-
-            SakeBottomAppBarItem(
-                icon = Icons.Filled.Create,
-                contentDescription = "投稿アイコン",
-                onClick = { /*TODO クリックイベント*/ }
-            )
-
-            SakeBottomAppBarItem(
-                icon = Icons.Filled.Star,
-                contentDescription = "スターアイコン",
-                onClick = { navController.navigate("starScreen") }
             )
         }
     }

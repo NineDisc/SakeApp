@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.sakeapp.model.SakeRanking
-import com.example.sakeapp.ui.theme.SakeAppTheme
 
 @Composable
 fun RankingContents() {
@@ -82,13 +81,13 @@ fun RankingItem(item: SakeRanking) {
 
 }
 
-@Preview
-@Composable
-fun RankingScreenPreview() {
-    SakeAppTheme {
-        RankingScreen()
-    }
-}
+//@Preview
+//@Composable
+//fun RankingScreenPreview() {
+//    SakeAppTheme {
+//        RankingScreen()
+//    }
+//}
 
 @Preview
 @Composable

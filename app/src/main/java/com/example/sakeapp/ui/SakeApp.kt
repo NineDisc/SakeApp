@@ -12,6 +12,7 @@ import com.example.sakeapp.ui.component.SakeBottomAppBar
 import com.example.sakeapp.ui.component.SakeTopAppBar
 import com.example.sakeapp.ui.feature.ranking.RankingContents
 import androidx.navigation.compose.composable
+import com.example.sakeapp.ui.feature.search.SearchScreen
 
 @Composable
 fun SakeApp() {
