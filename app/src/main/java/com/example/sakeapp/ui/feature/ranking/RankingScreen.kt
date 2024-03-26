@@ -78,7 +78,6 @@ fun RankingItem(item: SakeRanking) {
         Text(text = item.name, fontSize = 36.sp)
         Text(text = "${item.breweries}  ${item.area}")
     }
-
 }
 
 //@Preview

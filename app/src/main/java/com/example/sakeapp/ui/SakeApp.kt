@@ -12,7 +12,7 @@ import com.example.sakeapp.ui.component.SakeBottomAppBar
 import com.example.sakeapp.ui.component.SakeTopAppBar
 import com.example.sakeapp.ui.feature.ranking.RankingContents
 import androidx.navigation.compose.composable
-import com.example.sakeapp.ui.feature.search.SearchScreen
+import com.example.sakeapp.ui.feature.search.SearchContents
 
 @Composable
 fun SakeApp() {
@@ -26,7 +26,7 @@ fun SakeApp() {
         Column(modifier = Modifier.padding(padding)) {
             NavHost(navController = navController, startDestination = "ranking"){
                 composable("ranking") { RankingContents() }
-                composable("search") { SearchScreen() }
+                composable("search") { SearchContents() }
             }
         }
     }
