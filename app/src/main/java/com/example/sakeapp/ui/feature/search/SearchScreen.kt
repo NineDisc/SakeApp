@@ -36,8 +36,8 @@ fun SearchContents() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SearchScreen(viewModel: SearchViewModel) {
-
-    var zipCodeInput by remember { mutableStateOf("") }
+    viewModel.fetch()
+    var sakeWordInput by remember { mutableStateOf("") }
 
     Column {
         Text(
@@ -52,8 +52,8 @@ private fun SearchScreen(viewModel: SearchViewModel) {
         // TODO 検索画面の実装
         Row {
             TextField(
-                value = zipCodeInput,
-                onValueChange = { zipCodeInput = it },
+                value = sakeWordInput,
+                onValueChange = { sakeWordInput = it },
                 modifier = Modifier.weight(0.7f),
                 label = { Text("検索ワード") },
                 colors = TextFieldDefaults.textFieldColors(

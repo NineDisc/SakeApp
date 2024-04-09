@@ -80,14 +80,6 @@ fun RankingItem(item: SakeRanking) {
     }
 }
 
-//@Preview
-//@Composable
-//fun RankingScreenPreview() {
-//    SakeAppTheme {
-//        RankingScreen()
-//    }
-//}
-
 @Preview
 @Composable
 fun RankingItemPreview() {
