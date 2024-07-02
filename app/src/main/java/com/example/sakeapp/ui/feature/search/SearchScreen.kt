@@ -1,4 +1,4 @@
-package com.example.sakeapp.ui
+package com.example.sakeapp.ui.feature.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -8,14 +8,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -39,7 +36,7 @@ import com.example.sakeapp.ui.theme.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen() {
-    // TODO ViewModelを使って検索処理を実装する
+    val viewModel = remember { SearchViewModel() }
     var searchText by remember { mutableStateOf("") }
 
     Column(
@@ -63,8 +60,9 @@ fun SearchScreen() {
         contentAlignment = Alignment.Center
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
+                // 検索ボタン
                 IconButton(
-                    onClick = { /* TODO 検索 */ }
+                    onClick = { viewModel.fetchSearch(searchText) }
                 ) {
                     Icon(
                         imageVector = Icons.Default.Search,
@@ -84,6 +82,21 @@ fun SearchScreen() {
                         unfocusedIndicatorColor = Grey70
                     ),
                     modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White, shape = RoundedCornerShape(8.dp))
+                .padding(16.dp)
+        ) {
+            // 検索結果を表示
+            viewModel.searchResult.value?.let { result ->
+                Text(
+                    text = result.toString(),
+                    style = TextStyle(fontSize = 16.sp)
                 )
             }
         }

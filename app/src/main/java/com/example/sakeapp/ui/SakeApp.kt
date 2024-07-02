@@ -25,6 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.sakeapp.ui.component.SakeBottomAppBar
 import com.example.sakeapp.ui.component.SakeTopAppBar
 import com.example.sakeapp.ui.feature.ranking.RankingContents
+import com.example.sakeapp.ui.feature.search.SearchScreen
 
 @Composable
 fun SakeApp() {
