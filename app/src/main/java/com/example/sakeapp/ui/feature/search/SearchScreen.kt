@@ -81,7 +81,9 @@ fun SearchScreen() {
                         focusedIndicatorColor = Grey90,
                         unfocusedIndicatorColor = Grey70
                     ),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    maxLines = 1
                 )
             }
         }
@@ -92,12 +94,26 @@ fun SearchScreen() {
                 .background(Color.White, shape = RoundedCornerShape(8.dp))
                 .padding(16.dp)
         ) {
-            // 検索結果を表示
-            viewModel.searchResult.value?.let { result ->
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
                 Text(
-                    text = result.toString(),
-                    style = TextStyle(fontSize = 16.sp)
+                    text = "検索結果",
+                    style = TextStyle(fontSize = 20.sp),
+                    modifier = Modifier.padding(bottom = 16.dp)
                 )
+
+                // 検索結果を表示
+                viewModel.searchResult.value?.let { result ->
+                    Text(
+                        text = result,
+                        style = TextStyle(fontSize = 16.sp)
+                    )
+                }
             }
         }
     }
