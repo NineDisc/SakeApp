@@ -26,6 +26,7 @@ import com.example.sakeapp.ui.component.SakeBottomAppBar
 import com.example.sakeapp.ui.component.SakeTopAppBar
 import com.example.sakeapp.ui.feature.ranking.RankingContents
 import com.example.sakeapp.ui.feature.search.SearchScreen
+import com.example.sakeapp.ui.feature.search.SearchViewModel
 
 @Composable
 fun SakeApp() {
@@ -69,7 +70,7 @@ fun SakeApp() {
                 }) {
                 composable("ranking") { RankingContents() }
                 composable("starScreen") { StarIconScreen() }
-                composable("search") { SearchScreen() }
+                composable("search") { SearchScreen(viewModel = SearchViewModel()) }
             }
         }
     }
