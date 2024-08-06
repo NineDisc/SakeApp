@@ -42,21 +42,16 @@ fun SearchScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .background(Grey10),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(
-            text = "銘柄検索",
-            style = TextStyle(fontSize = 20.sp),
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
+        // 検索バー
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White, shape = RoundedCornerShape(8.dp))
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(16.dp)
+                .background(Grey40, shape = RoundedCornerShape(8.dp)),
         contentAlignment = Alignment.Center
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -76,10 +71,12 @@ fun SearchScreen() {
                 TextField(
                     value = searchText,
                     onValueChange = { searchText = it },
-                    placeholder = { Text("検索") },
+                    placeholder = { Text("銘柄検索") },
                     colors = TextFieldDefaults.textFieldColors(
-                        focusedIndicatorColor = Grey90,
-                        unfocusedIndicatorColor = Grey70
+                        containerColor = Grey30,
+                        cursorColor = BlueGrey,
+                        focusedIndicatorColor = Grey60,
+                        unfocusedIndicatorColor = Grey40
                     ),
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
@@ -88,18 +85,14 @@ fun SearchScreen() {
             }
         }
 
+        // 検索結果のリスト
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White, shape = RoundedCornerShape(8.dp))
                 .padding(16.dp)
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
                     text = "検索結果",
@@ -109,10 +102,25 @@ fun SearchScreen() {
 
                 // 検索結果を表示
                 viewModel.searchResult.value?.let { result ->
-                    Text(
-                        text = result,
-                        style = TextStyle(fontSize = 16.sp)
-                    )
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        // TODO:  検索結果アイテム（仮）
+                        repeat(5) { index ->
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 8.dp)
+                                    .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
+                                    .padding(16.dp)
+                            ) {
+                                Text(
+                                    text = "$result $index",
+                                    style = TextStyle(fontSize = 16.sp)
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }
