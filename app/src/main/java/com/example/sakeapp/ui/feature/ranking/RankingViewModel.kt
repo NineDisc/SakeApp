@@ -44,7 +44,7 @@ class RankingViewModel : ViewModel() {
                 year = rankingsApiResult.yearMonth.substring(0, 4)
                 month = rankingsApiResult.yearMonth.substring(4, 6)
 
-                for (index in 0..10) {
+                for (index in 0..9) {
                     val rankingItem = rankingsApiResult.overall[index]
                     val brand =
                         brandsApiResult.brands.last { brands -> rankingItem.brandId == brands.id }
